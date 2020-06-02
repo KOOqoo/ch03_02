@@ -1,42 +1,14 @@
 <!-- Author : koo younghoe -->
 {% extends 'blog/base.html' %}
-{% load static %}
-<!DOCTYPE html>
 
-<html lang="en">
-   <head>
-      <title>Django Girls blog</title>
-      <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstraptheme.min.css">
-      <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-   </head>
-
-   <body>
-     <div class="page-header">
-       <h1><a href="/">Web Service Programming blog</a></h1>
-     </div>
-
-     {% block content %}
-        {% for post in posts %}
-        <div class="post">
-          <div class="date">
-            {{ post.published_date }}
-          </div>
-          <h1><a href="">{{ post.title }}</a></h1>
-          <p>{{ post.text|linebreaksbr }}</p>
-        </div>
-        {% endfor %}
-     {% endblock %}
-
-     <!--
-     <h1>이미지</h1>
-     <img src="{% static 'css/test.jpg' %}" width="200" height="150">
-     -->
-     <h1>이미지</h1>
-     <img src="{% static 'css/test.jpg' %}" width="200" height="150">
-
-     <h1>비디오</h1>
-     <video src="{% static 'css/test.mp4' %}" controls width="300" height="250"></video>
-   </body>
-</html>
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <div class="date">
+        {{ post.published_date }}
+      </div>
+      <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+      <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
